@@ -25,19 +25,11 @@
     "url": "https://github.com/kk3939/graphql-next/issues"
   },
   "homepage": "https://github.com/kk3939/graphql-next#readme",
+  "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/backend",
+    "packages/frontend"
   ],
-  "dependencies": {
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.9.1",
-    "express": "^4.21.1",
-    "graphql": "^16.9.0",
-    "mysql2": "^3.11.4",
-    "reflect-metadata": "^0.2.2",
-    "type-graphql": "^2.0.0-rc.2",
-    "typeorm": "^0.3.20"
-  },
   "devDependencies": {
     "biome": "^0.2.2",
     "husky": "^9.1.7",
