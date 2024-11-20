@@ -1,0 +1,47 @@
+{
+  "name": "graphql-next",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "biome lint packages/*.{js,ts,tsx,jsx}",
+    "lint:fix": "biome check --write packages/*.{js,ts,tsx,jsx}",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,jsx}": [
+      "npm run lint:fix"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kk3939/graphql-next.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kk3939/graphql-next/issues"
+  },
+  "homepage": "https://github.com/kk3939/graphql-next#readme",
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.9.1",
+    "express": "^4.21.1",
+    "graphql": "^16.9.0",
+    "mysql2": "^3.11.4",
+    "reflect-metadata": "^0.2.2",
+    "type-graphql": "^2.0.0-rc.2",
+    "typeorm": "^0.3.20"
+  },
+  "devDependencies": {
+    "biome": "^0.2.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
+    "typescript": "^5.6.3"
+  }
+}
