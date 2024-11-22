@@ -8,7 +8,7 @@ import { TodoResolver } from './resolvers/TodoResolver';
 (async () => {
   const dataSource = new DataSource({
     type: 'mysql',
-    host: 'mysql',
+    host: 'localhost',
     port: 3306,
     username: 'todo_user',
     password: 'todo_password',
@@ -26,6 +26,7 @@ import { TodoResolver } from './resolvers/TodoResolver';
   const server = new ApolloServer({ schema });
 
   const app = Express();
+  await server.start();
   server.applyMiddleware({ app } as ServerRegistration);
 
   app.listen(4000, () => {
