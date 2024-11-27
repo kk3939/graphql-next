@@ -1,17 +1,19 @@
 import { Resolver, Query, Mutation, Arg } from 'type-graphql';
 import { Todo } from '../entities/Todo';
-import { DataSource } from 'typeorm';
+import { dataSource } from '../datasource';
+import { Repository } from 'typeorm';
 
 @Resolver()
 export class TodoResolver {
-  constructor(private dataSource: DataSource) {}
-  private get todoRepo() {
-    return this.dataSource.getRepository(Todo);
+  private readonly todoRepository: Repository<Todo>;
+
+  constructor() {
+    this.todoRepository = dataSource.getRepository(Todo);
   }
 
   @Query(() => [Todo])
   async getTodos() {
-    return await this.todoRepo.find();
+    return await this.todoRepository.find();
   }
 
   @Mutation(() => Todo)
@@ -19,21 +21,21 @@ export class TodoResolver {
     const todo = new Todo();
     todo.title = title;
     todo.completed = false;
-    return await this.todoRepo.save(todo);
+    return await this.todoRepository.save(todo);
   }
 
   @Mutation(() => Boolean)
   async updateTodo(@Arg('id') id: number, @Arg('completed') completed: boolean) {
-    const todo = await this.todoRepo.findOne({ where: { id } });
+    const todo = await this.todoRepository.findOne({ where: { id } });
     if (!todo) return false;
     todo.completed = completed;
-    await this.todoRepo.save(todo);
+    await this.todoRepository.save(todo);
     return true;
   }
 
   @Mutation(() => Boolean)
   async deleteTodo(@Arg('id') id: number) {
-    await this.todoRepo.delete({ id });
+    await this.todoRepository.delete({ id });
     return true;
   }
 }
